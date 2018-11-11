@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:Custom="clr-namespace:MyManga.CustomViews"
              x:Class="MyManga.ReadMangaPage">
     <ContentPage.Content>
         <ScrollView>
@@ -14,7 +15,11 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Image Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding ImageUrl}"/>
+                                <Custom:ZoomGestureContainer Grid.RowSpan="2">
+                                    <Custom:ZoomGestureContainer.Content>
+                                        <Image Aspect="Fill" Source="{Binding ImageUrl}"/>
+                                    </Custom:ZoomGestureContainer.Content>
+                                </Custom:ZoomGestureContainer>
                                 <StackLayout Grid.Row="1" BackgroundColor="#80000000" Padding="12">
                                     <Label TextColor="White" Text="{Binding PageNumber}" FontSize="10" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
                                 </StackLayout>
