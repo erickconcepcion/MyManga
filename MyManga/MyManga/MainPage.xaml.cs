@@ -17,8 +17,14 @@ namespace MyManga
         private IEnumerable<MangaResult> mangaResults = new List<MangaResult>();
         protected override async void OnAppearing()
         {
-            MangaList.ItemsSource = mangaResults = await App.InMangaService.GetAllMangaResponse();
-
+            try
+            {
+                MangaList.ItemsSource = mangaResults = await App.InMangaService.GetAllMangaResponse();
+            }
+            catch (Utils.UnsuccessfulRequestException ex)
+            {
+                await DisplayAlert("Network error", ex.Message, "Ok");
+            }
             base.OnAppearing();
         }
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)

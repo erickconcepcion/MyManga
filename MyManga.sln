@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyManga.Test", "MyManga.Test\MyManga.Test.csproj", "{E0F358DF-9BD8-4FE1-92B2-FFD965467157}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyManga.Test", "MyManga.Test\MyManga.Test.csproj", "{E0F358DF-9BD8-4FE1-92B2-FFD965467157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMangaModels", "InMangaModels\InMangaModels.csproj", "{A7F68C65-81DA-42D4-B051-C76F1A56797D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMangaModels", "InMangaModels\InMangaModels.csproj", "{A7F68C65-81DA-42D4-B051-C76F1A56797D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyManga.Android", "MyManga\MyManga.Android\MyManga.Android.csproj", "{AB37B149-A9C9-447F-823B-06BFF89DD400}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyManga.iOS", "MyManga\MyMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyManga.UWP", "MyManga\MyManga.UWP\MyManga.UWP.csproj", "{F6D788F0-47E2-45B7-9F8D-3AC36C11CA20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyManga", "MyManga\MyManga\MyManga.csproj", "{A6D8871F-D5DE-4F41-9735-9EAA2A3E4286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyManga", "MyManga\MyManga\MyManga.csproj", "{A6D8871F-D5DE-4F41-9735-9EAA2A3E4286}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -228,6 +228,7 @@ Global
 		{C845F6E2-7962-4CC5-9918-E044174048C6}.AppStore|x64.ActiveCfg = AppStore|iPhone
 		{C845F6E2-7962-4CC5-9918-E044174048C6}.AppStore|x86.ActiveCfg = AppStore|iPhone
 		{C845F6E2-7962-4CC5-9918-E044174048C6}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{C845F6E2-7962-4CC5-9918-E044174048C6}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{C845F6E2-7962-4CC5-9918-E044174048C6}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{C845F6E2-7962-4CC5-9918-E044174048C6}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{C845F6E2-7962-4CC5-9918-E044174048C6}.Debug|iPhone.Build.0 = Debug|iPhone

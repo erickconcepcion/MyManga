@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using MyManga.InMangaModels;
+using MyManga.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace MyManga.Services
 {
@@ -18,13 +20,17 @@ namespace MyManga.Services
         public const string PageUrl = "https://inmanga.com/images/manga/{0}/chapter/{1}/page/{2}/{3}";
         public async Task<string> GetSuscessStringResponse(string url)
         {
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                throw new UnsuccessfulRequestException();
+            }
             string resString = "";
             using (var client = new HttpClient())
             {
-                var response = await client.GetAsync(url);
+                var response = await client.GetAsync(url);                
                 if (!response.IsSuccessStatusCode)
                 {
-                    throw new Exception("Is not a success status code.");
+                    throw new UnsuccessfulRequestException(response.StatusCode);
                 }
                 resString = await response.Content.ReadAsStringAsync();
             }
