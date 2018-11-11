@@ -28,9 +28,17 @@ namespace MyManga
         private IEnumerable<ChapterDetailResult> chapterResults = new List<ChapterDetailResult>();
         protected async override void OnAppearing()
         {
-            var res = await App.InMangaService.GetMangaDetails(_manga.Identification);
-            chapterResults = res.result.OrderByDescending(c=>c.Number);
-            ChapterList.ItemsSource = chapterResults;
+            try
+            {
+                var res = await App.InMangaService.GetMangaDetails(_manga.Identification);
+                chapterResults = res.result.OrderByDescending(c => c.Number);
+                ChapterList.ItemsSource = chapterResults;
+            }
+            catch (Utils.UnsuccessfulRequestException ex)
+            {
+                await DisplayAlert("Network error", ex.Message, "Ok");
+            }
+            
             base.OnAppearing();
         }
         private async void MangaList_ItemTapped(object sender, ItemTappedEventArgs e)

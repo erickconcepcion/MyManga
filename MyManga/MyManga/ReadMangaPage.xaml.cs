@@ -30,8 +30,16 @@ namespace MyManga
         private IEnumerable<MangaPage> mangaPages = new List<MangaPage>();
         protected async override void OnAppearing()
         {
-            mangaPages = await App.InMangaService.GetListPageModels(_manga, _chapter);
-            CvItems.ItemsSource = mangaPages;
+            try
+            {
+                mangaPages = await App.InMangaService.GetListPageModels(_manga, _chapter);
+                CvItems.ItemsSource = mangaPages;
+            }
+            catch (Utils.UnsuccessfulRequestException ex)
+            {
+                await DisplayAlert("Network error", ex.Message, "Ok");
+            }
+
             base.OnAppearing();
         }
     }
