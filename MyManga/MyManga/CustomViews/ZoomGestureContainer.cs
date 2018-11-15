@@ -12,7 +12,8 @@ namespace MyManga.CustomViews
         double startScale = 1;
         double xOffset = 0;
         double yOffset = 0;
-
+        public event EventHandler ZoomStarted;
+        public event EventHandler ZoomEnded;
         public ZoomGestureContainer()
         {
             var pinchGesture = new PinchGestureRecognizer();
@@ -24,6 +25,7 @@ namespace MyManga.CustomViews
         {
             if (e.Status == GestureStatus.Started)
             {
+                OnZoomStart(EventArgs.Empty);
                 startScale = Content.Scale;
                 Content.AnchorX = 0;
                 Content.AnchorY = 0;
@@ -59,7 +61,16 @@ namespace MyManga.CustomViews
                 Content.TranslationY = 0;
                 currentScale = startScale;
                 Content.Scale = startScale;
+                OnZoomEnd(EventArgs.Empty);
             }
+        }
+        protected virtual void OnZoomStart(EventArgs e)
+        {
+            ZoomStarted?.Invoke(this, e);
+        }
+        protected virtual void OnZoomEnd(EventArgs e)
+        {
+            ZoomEnded?.Invoke(this, e);
         }
     }
 }

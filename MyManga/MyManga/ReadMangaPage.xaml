@@ -1,23 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              xmlns:Custom="clr-namespace:MyManga.CustomViews"
              x:Class="MyManga.ReadMangaPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
-                <cv:CarouselView x:Name="CvItems">
-                    <cv:CarouselView.ItemTemplate>
+            <StackLayout>                
+                <cards:CarouselView x:Name="CvItems" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <cards:CarouselView.ItemTemplate>
                         <DataTemplate>
                             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Custom:ZoomGestureContainer Grid.RowSpan="2">
+                                <Custom:ZoomGestureContainer ZoomStarted="ZoomGestureContainer_ZoomStarted" ZoomEnded="ZoomGestureContainer_ZoomEnded">
                                     <Custom:ZoomGestureContainer.Content>
-                                        <Image Aspect="Fill" Source="{Binding ImageUrl}"/>
+                                        <Image Grid.RowSpan="2" Aspect="Fill" Source="{Binding ImageUrl}"/>
                                     </Custom:ZoomGestureContainer.Content>
                                 </Custom:ZoomGestureContainer>
                                 <StackLayout Grid.Row="1" BackgroundColor="#80000000" Padding="12">
@@ -25,8 +26,12 @@
                                 </StackLayout>
                             </Grid>
                         </DataTemplate>
-                    </cv:CarouselView.ItemTemplate>
-                </cv:CarouselView>
+                    </cards:CarouselView.ItemTemplate>
+                    <controls:IndicatorsControl ToFadeDuration="1500"/>
+                    <controls:LeftArrowControl ToFadeDuration="2500"/>
+                    <controls:RightArrowControl ToFadeDuration="2500"/>
+                </cards:CarouselView>
+                    
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
