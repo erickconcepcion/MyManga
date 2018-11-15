@@ -33,7 +33,7 @@ namespace MyManga
             try
             {
                 mangaPages = await App.InMangaService.GetListPageModels(_manga, _chapter);
-                CvItems.ItemsSource = mangaPages;
+                CvItems.ItemsSource = mangaPages.ToList();
             }
             catch (Utils.UnsuccessfulRequestException ex)
             {
@@ -41,6 +41,16 @@ namespace MyManga
             }
 
             base.OnAppearing();
+        }
+
+        private void ZoomGestureContainer_ZoomStarted(object sender, EventArgs e)
+        {
+            CvItems.IsPanInteractionEnabled = false;
+        }
+
+        private void ZoomGestureContainer_ZoomEnded(object sender, EventArgs e)
+        {
+            CvItems.IsPanInteractionEnabled = true;
         }
     }
 }
