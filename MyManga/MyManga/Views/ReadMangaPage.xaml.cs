@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MyManga
+namespace MyManga.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ReadMangaPage : ContentPage

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace MyManga.Services
+namespace MyManga.Infrastructure.Services
 {
     public class InMangaService
     {

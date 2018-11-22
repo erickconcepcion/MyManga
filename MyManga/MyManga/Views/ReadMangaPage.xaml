@@ -4,7 +4,7 @@
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              xmlns:Custom="clr-namespace:MyManga.CustomViews"
-             x:Class="MyManga.ReadMangaPage">
+             x:Class="MyManga.Views.ReadMangaPage">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>                

@@ -1,4 +1,5 @@
-﻿using MyManga.Services;
+﻿using MyManga.Infrastructure.Services;
+using MyManga.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

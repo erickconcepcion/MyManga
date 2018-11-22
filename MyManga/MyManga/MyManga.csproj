@@ -18,19 +18,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CapitulosPage.xaml.cs">
+    <Compile Update="Views\CapitulosPage.xaml.cs">
       <DependentUpon>CapitulosPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="ReadMangaPage.xaml.cs">
+    <Compile Update="Views\ReadMangaPage.xaml.cs">
       <DependentUpon>ReadMangaPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CapitulosPage.xaml">
+    <EmbeddedResource Update="Views\CapitulosPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ReadMangaPage.xaml">
+    <EmbeddedResource Update="Views\ReadMangaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -48,5 +48,9 @@
     <None Update="ReadMangaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

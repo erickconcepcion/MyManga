@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:MyManga"
              Title="My Manga Comodo"
-             x:Class="MyManga.MainPage">
+             x:Class="MyManga.Views.MainPage">
     <ContentPage.Content>
         <StackLayout>
             <!-- Place new controls here -->
