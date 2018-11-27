@@ -19,7 +19,7 @@ namespace MyManga.Views
 		{
 			InitializeComponent ();
 		}
-        public CapitulosPage(MangaResult manga)
+        /*public CapitulosPage(MangaResult manga)
         {
             _manga = manga;
             InitializeComponent();
@@ -40,11 +40,11 @@ namespace MyManga.Views
             }
             
             base.OnAppearing();
-        }
+        }*/
         private async void MangaList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new ReadMangaPage(_manga, ChapterList.SelectedItem as ChapterDetailResult));
-            ChapterList.SelectedItem = null;
+            /*await Navigation.PushAsync(new ReadMangaPage(_manga, ChapterList.SelectedItem as ChapterDetailResult));
+            ChapterList.SelectedItem = null;*/
         }
     }
 }

@@ -12,7 +12,14 @@ using Xamarin.Essentials;
 
 namespace MyManga.Infrastructure.Services
 {
-    public class InMangaService
+    public interface IInMangaService
+    {
+        Task<string> GetSuscessStringResponse(string url);
+        Task<IEnumerable<MangaResult>> GetAllMangaResponse();
+        Task<ChapterMessageResult> GetMangaDetails(string mangaId);
+        Task<IEnumerable<MangaPage>> GetListPageModels(MangaResult manga, ChapterDetailResult chapter);
+    }
+    public class InMangaService : IInMangaService
     {
         public const string AllManga = "https://inmanga.com/OnMangaQuickSearch/Source/QSMangaList.json";
         public const string MangaDetails = "https://inmanga.com/chapter/getall?mangaIdentification={0}";
@@ -48,19 +55,7 @@ namespace MyManga.Infrastructure.Services
             var desResponse = JsonConvert.DeserializeObject<ChapterResult>(res);
             return JsonConvert.DeserializeObject<ChapterMessageResult>(desResponse.data);
         }
-        public async Task<IEnumerable<string>> GetListPages(MangaResult manga, ChapterDetailResult chapter)
-        {
-            var res = await GetSuscessStringResponse(string.Format(PageList, chapter.Identification));
-            var doc = new HtmlDocument();
-            doc.LoadHtml(res);
-            var pageIdList = doc.GetElementbyId("PageList")
-                .ChildNodes.Where(n => n.Name == "option").ToList()
-                .Select(n => string.Format(PageUrl,
-                    manga.Name.Replace(" ", "-"), chapter.FriendlyChapterNumberUrl, n.InnerText, n.GetAttributeValue("value", ""))
-                );
-            return pageIdList;
-        }
-
+        
         public async Task<IEnumerable<MangaPage>> GetListPageModels(MangaResult manga, ChapterDetailResult chapter)
         {
             var res = await GetSuscessStringResponse(string.Format(PageList, chapter.Identification));

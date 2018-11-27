@@ -4,53 +4,21 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>pdbonly</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="CardsView" Version="1.6.6" />
     <PackageReference Include="HtmlAgilityPack" Version="1.8.9" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1-beta1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Xamarin.Essentials" Version="0.11.0-preview" />
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\CapitulosPage.xaml.cs">
-      <DependentUpon>CapitulosPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ReadMangaPage.xaml.cs">
-      <DependentUpon>ReadMangaPage.xaml</DependentUpon>
-    </Compile>
+    <Folder Include="CustomViews\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Infrastructure\Services\" />
+    <Folder Include="Models\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Views\CapitulosPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReadMangaPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="CapitulosPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="ReadMangaPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ namespace MyManga.Views
 		{
 			InitializeComponent ();
 		}
-        public ReadMangaPage(MangaResult manga, ChapterDetailResult chapter)
+        /*public ReadMangaPage(MangaResult manga, ChapterDetailResult chapter)
         {
             _manga = manga;
             _chapter = chapter;
@@ -41,7 +41,7 @@ namespace MyManga.Views
             }
 
             base.OnAppearing();
-        }
+        }*/
 
         private void ZoomGestureContainer_ZoomStarted(object sender, EventArgs e)
         {
