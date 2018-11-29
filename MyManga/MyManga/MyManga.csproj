@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CustomViews\" />
     <Folder Include="Extensions\" />
     <Folder Include="Infrastructure\Services\" />
     <Folder Include="Models\" />

@@ -23,6 +23,7 @@ namespace MyManga.ViewModels
 
             //command declaration
             FilterMangaCommand = new DelegateCommand<string>(FilterManga, CanFilter);
+            SelectMangaCommand = new DelegateCommand<MangaResult>(SelectManga, CanSelect);
 
         }
         //Dependency Fields
@@ -67,7 +68,17 @@ namespace MyManga.ViewModels
         {
             return true;
         }
-        
+
+        public DelegateCommand<MangaResult> SelectMangaCommand     { get; private set; }
+        void SelectManga(MangaResult parameter)
+        {
+            
+        }
+        bool CanSelect(object parameter)
+        {
+            return true;
+        }
+
         public async Task InnitMangaListAsync()
         {
             IsListRefreshing = true;
