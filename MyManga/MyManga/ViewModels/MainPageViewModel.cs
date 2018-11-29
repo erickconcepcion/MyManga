@@ -13,11 +13,12 @@ using Xamarin.Forms;
 
 namespace MyManga.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelListView
     {
         public MainPageViewModel(INavigationService navigationService, IInMangaService inMangaService)
             : base(navigationService)
         {
+            _navigationService = navigationService;
             _inMangaService = inMangaService;
             Title = "My Manga Comodo";
 
@@ -28,6 +29,7 @@ namespace MyManga.ViewModels
         }
         //Dependency Fields
         private IInMangaService _inMangaService;
+        private INavigationService _navigationService;
 
         //Bindeable Props
         private ObservableCollection<MangaResult> _mangaResults = new ObservableCollection<MangaResult>();
@@ -36,14 +38,6 @@ namespace MyManga.ViewModels
             get{ return _mangaResults; }
             set{ SetProperty(ref _mangaResults, value); }
         }
-
-        private bool _isListRefreshing = false;
-        public bool IsListRefreshing
-        {
-            get { return _isListRefreshing; }
-            set { SetProperty(ref _isListRefreshing, value); }
-        }
-
         
         //Util Fields
         private IEnumerable<MangaResult> mangaResults = new List<MangaResult>();
@@ -69,10 +63,12 @@ namespace MyManga.ViewModels
             return true;
         }
 
-        public DelegateCommand<MangaResult> SelectMangaCommand     { get; private set; }
-        void SelectManga(MangaResult parameter)
+        public DelegateCommand<MangaResult> SelectMangaCommand { get; private set; }
+        async void SelectManga(MangaResult parameter)
         {
-            
+            var navParams = new NavigationParameters();
+            navParams.Add("manga", parameter);
+            await _navigationService.NavigateAsync("ChaptersPage", navParams);
         }
         bool CanSelect(object parameter)
         {

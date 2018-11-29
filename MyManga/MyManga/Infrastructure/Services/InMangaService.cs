@@ -16,7 +16,7 @@ namespace MyManga.Infrastructure.Services
     {
         Task<string> GetSuscessStringResponse(string url);
         Task<IEnumerable<MangaResult>> GetAllMangaResponse();
-        Task<ChapterMessageResult> GetMangaDetails(string mangaId);
+        Task<IEnumerable<ChapterDetailResult>> GetMangaDetails(string mangaId);
         Task<IEnumerable<MangaPage>> GetListPageModels(MangaResult manga, ChapterDetailResult chapter);
     }
     public class InMangaService : IInMangaService
@@ -49,11 +49,11 @@ namespace MyManga.Infrastructure.Services
             return JsonConvert.DeserializeObject<List<MangaResult>>(res);
         }
 
-        public async Task<ChapterMessageResult> GetMangaDetails(string mangaId)
+        public async Task<IEnumerable<ChapterDetailResult>> GetMangaDetails(string mangaId)
         {
             var res = await GetSuscessStringResponse(string.Format(MangaDetails, mangaId));
             var desResponse = JsonConvert.DeserializeObject<ChapterResult>(res);
-            return JsonConvert.DeserializeObject<ChapterMessageResult>(desResponse.data);
+            return JsonConvert.DeserializeObject<ChapterMessageResult>(desResponse.data).result.OrderByDescending(c => c.Number);
         }
         
         public async Task<IEnumerable<MangaPage>> GetListPageModels(MangaResult manga, ChapterDetailResult chapter)

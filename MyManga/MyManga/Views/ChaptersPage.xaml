@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pb="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="MyManga.Views.ChaptersPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView  ItemsSource="{Binding ChapterResults}" HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" 
+                       SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!--<TextCell  Text="{Binding ShowChapter}"/>-->
+                        <ViewCell>
+                            <StackLayout Padding="16" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding ShowChapter}" FontSize="Small" FontAttributes="Bold"/>
+                                <Label Text="{Binding ShowPages}" FontSize="Small" />                                
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

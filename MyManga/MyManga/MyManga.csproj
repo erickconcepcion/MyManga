@@ -20,4 +20,10 @@
     <Folder Include="Utils\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\ChaptersPage.xaml.cs">
+      <DependentUpon>ChaptersPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

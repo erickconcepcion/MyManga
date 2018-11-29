@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pb="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:Custom="clr-namespace:MyManga.CustomViews"
              x:Class="MyManga.Views.MainPage"
              Title="{Binding Title}">
     <StackLayout>
@@ -15,7 +14,7 @@
             </Entry.Behaviors>
         </Entry>
 
-        <ListView x:Name="MangaList" ItemsSource="{Binding MangaResults}" 
+        <ListView ItemsSource="{Binding MangaResults}" 
                   HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" SelectionMode="None">
             <ListView.Behaviors>
                 <pb:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMangaCommand}" EventArgsParameterPath="Item" />

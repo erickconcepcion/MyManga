@@ -11,11 +11,11 @@ using Xamarin.Forms.Xaml;
 namespace MyManga.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CapitulosPage : ContentPage
+	public partial class ChaptersPage : ContentPage
 	{
         private MangaResult _manga;
 
-        public CapitulosPage ()
+        public ChaptersPage()
 		{
 			InitializeComponent ();
 		}
