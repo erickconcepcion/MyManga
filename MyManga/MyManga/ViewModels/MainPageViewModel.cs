@@ -40,7 +40,7 @@ namespace MyManga.ViewModels
         }
         
         //Util Fields
-        private IEnumerable<MangaResult> mangaResults = new List<MangaResult>();
+        private IEnumerable<MangaResult> _mangaFilter = new List<MangaResult>();
 
         //Delegate Commands
         public DelegateCommand<string> FilterMangaCommand { get; private set; }
@@ -49,11 +49,11 @@ namespace MyManga.ViewModels
             IsListRefreshing = true;
             if (string.IsNullOrWhiteSpace(parameter) || string.IsNullOrEmpty(parameter))
             {
-                MangaResults = new ObservableCollection<MangaResult>(mangaResults);
+                MangaResults = new ObservableCollection<MangaResult>(_mangaFilter);
             }
             else
             {
-                MangaResults = new ObservableCollection<MangaResult>(mangaResults
+                MangaResults = new ObservableCollection<MangaResult>(_mangaFilter
                                    .Where(x => x.Name.ToLower().Contains(parameter.ToLower())));
             }
             IsListRefreshing = false;
@@ -80,8 +80,8 @@ namespace MyManga.ViewModels
             IsListRefreshing = true;
             try
             {
-                mangaResults = await _inMangaService.GetAllMangaResponse();
-                MangaResults = new ObservableCollection<MangaResult>(mangaResults);
+                _mangaFilter = await _inMangaService.GetAllMangaResponse();
+                MangaResults = new ObservableCollection<MangaResult>(_mangaFilter);
             }
             catch (Utils.UnsuccessfulRequestException ex)
             {

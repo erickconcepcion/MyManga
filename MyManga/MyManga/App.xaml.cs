@@ -32,6 +32,7 @@ namespace MyManga
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<ChaptersPage, ChaptersPageViewModel>();
+            containerRegistry.RegisterForNavigation<ReadMangaPage, ReadMangaPageViewModel>();
             containerRegistry.RegisterSingleton<IInMangaService, InMangaService>();
         }
     }

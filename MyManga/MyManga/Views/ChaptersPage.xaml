@@ -8,6 +8,9 @@
         <StackLayout>
             <ListView  ItemsSource="{Binding ChapterResults}" HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" 
                        SelectionMode="None">
+                <ListView.Behaviors>
+                    <pb:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectChapterCommand}" EventArgsParameterPath="Item" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <!--<TextCell  Text="{Binding ShowChapter}"/>-->

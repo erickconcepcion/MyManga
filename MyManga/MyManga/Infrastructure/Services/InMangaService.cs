@@ -34,12 +34,19 @@ namespace MyManga.Infrastructure.Services
             string resString = "";
             using (var client = new HttpClient())
             {
-                var response = await client.GetAsync(url);                
-                if (!response.IsSuccessStatusCode)
+                try
                 {
-                    throw new UnsuccessfulRequestException(response.StatusCode);
+                    var response = await client.GetAsync(url);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new UnsuccessfulRequestException(response.StatusCode);
+                    }
+                    resString = await response.Content.ReadAsStringAsync();
                 }
-                resString = await response.Content.ReadAsStringAsync();
+                catch (Exception e)
+                {
+                    throw new UnsuccessfulRequestException(e.Message);
+                }                
             }
             return resString;
         }

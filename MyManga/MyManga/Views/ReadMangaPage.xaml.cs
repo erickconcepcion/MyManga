@@ -19,38 +19,6 @@ namespace MyManga.Views
         public ReadMangaPage ()
 		{
 			InitializeComponent ();
-		}
-        /*public ReadMangaPage(MangaResult manga, ChapterDetailResult chapter)
-        {
-            _manga = manga;
-            _chapter = chapter;
-            InitializeComponent();
-            Title = $"{_manga.Name}: {_chapter.ShowChapter}";
-        }
-        private IEnumerable<MangaPage> mangaPages = new List<MangaPage>();
-        protected async override void OnAppearing()
-        {
-            try
-            {
-                mangaPages = await App.InMangaService.GetListPageModels(_manga, _chapter);
-                CvItems.ItemsSource = mangaPages.ToList();
-            }
-            catch (Utils.UnsuccessfulRequestException ex)
-            {
-                await DisplayAlert("Network error", ex.Message, "Ok");
-            }
-
-            base.OnAppearing();
-        }*/
-
-        private void ZoomGestureContainer_ZoomStarted(object sender, EventArgs e)
-        {
-            CvItems.IsPanInteractionEnabled = false;
-        }
-
-        private void ZoomGestureContainer_ZoomEnded(object sender, EventArgs e)
-        {
-            CvItems.IsPanInteractionEnabled = true;
-        }
+		}        
     }
 }

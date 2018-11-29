@@ -16,11 +16,14 @@ namespace MyManga.ViewModels
         public ChaptersPageViewModel(INavigationService navigationService, IInMangaService inMangaService)
             : base(navigationService)
         {
+            _navigationService = navigationService;
             _inMangaService = inMangaService;
+            SelectChapterCommand = new DelegateCommand<ChapterDetailResult>(SelectChapter, CanSelect);
         }
 
         //Dependency Fields
         private IInMangaService _inMangaService;
+        private INavigationService _navigationService;
 
         //Bindeable Props
         private ObservableCollection<ChapterDetailResult> _chapterResults = new ObservableCollection<ChapterDetailResult>();
@@ -35,9 +38,14 @@ namespace MyManga.ViewModels
 
         //Commands
         public DelegateCommand<ChapterDetailResult> SelectChapterCommand { get; private set; }
-        void SelectChapter(ChapterDetailResult parameter)
+        async void SelectChapter(ChapterDetailResult parameter)
         {
-
+            var navParams = new NavigationParameters
+            {
+                { "manga", _mangaResult },
+                { "chapter", parameter }
+            };
+            await _navigationService.NavigateAsync("ReadMangaPage", navParams);
         }
         bool CanSelect(object parameter)
         {
@@ -61,7 +69,7 @@ namespace MyManga.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            _mangaResult = parameters.GetValue<MangaResult>("manga");
+            _mangaResult = parameters.GetValue<MangaResult>("manga") != null ? parameters.GetValue<MangaResult>("manga") : _mangaResult;
             Title = _mangaResult.Name;
             await InnitChapterListAsync(_mangaResult);            
             base.OnNavigatedTo(parameters);
