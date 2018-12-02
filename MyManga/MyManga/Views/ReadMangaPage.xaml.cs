@@ -13,12 +13,19 @@ namespace MyManga.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ReadMangaPage : ContentPage
 	{
-        private MangaResult _manga;
-        private ChapterDetailResult _chapter;
-
         public ReadMangaPage ()
 		{
 			InitializeComponent ();
-		}        
+		}
+
+        private void ZoomGestureContainer_ZoomStarted(object sender, EventArgs e)
+        {
+            CvMangaReader.IsPanInteractionEnabled = false;
+        }
+
+        private void ZoomGestureContainer_ZoomEnded(object sender, EventArgs e)
+        {
+            CvMangaReader.IsPanInteractionEnabled = true;
+        }
     }
 }

@@ -13,8 +13,6 @@ namespace MyManga.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ChaptersPage : ContentPage
 	{
-        private MangaResult _manga;
-
         public ChaptersPage()
 		{
 			InitializeComponent ();

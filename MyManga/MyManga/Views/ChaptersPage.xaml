@@ -6,7 +6,8 @@
              Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
-            <ListView  ItemsSource="{Binding ChapterResults}" HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" 
+            <ListView  ItemsSource="{Binding ChapterResults}" HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}"
+                       IsPullToRefreshEnabled="True" RefreshCommand=""
                        SelectionMode="None">
                 <ListView.Behaviors>
                     <pb:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectChapterCommand}" EventArgsParameterPath="Item" />
@@ -15,7 +16,7 @@
                     <DataTemplate>
                         <!--<TextCell  Text="{Binding ShowChapter}"/>-->
                         <ViewCell>
-                            <StackLayout Padding="16" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <StackLayout Padding="16" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
                                 <Label Text="{Binding ShowChapter}" FontSize="Small" FontAttributes="Bold"/>
                                 <Label Text="{Binding ShowPages}" FontSize="Small" />                                
                             </StackLayout>

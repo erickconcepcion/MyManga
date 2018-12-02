@@ -10,8 +10,8 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <cards:CarouselView ItemsSource="{Binding MangaPages}"
-                                    HorizontalOptions="FillAndExpand" IsPanInteractionEnabled="{Binding CanSweep}"
+                <cards:CarouselView x:Name="CvMangaReader" ItemsSource="{Binding MangaPages}"
+                                    HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
                     <cards:CarouselView.ItemTemplate>
                         <DataTemplate>
@@ -20,11 +20,7 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Custom:ZoomGestureContainer>
-                                    <Custom:ZoomGestureContainer.Behaviors>
-                                        <pb:EventToCommandBehavior EventName="ZoomStarted" Command="{Binding ZoomStartCommand}" CommandParameter="in"/>
-                                        <pb:EventToCommandBehavior EventName="ZoomEnded" Command="{Binding ZoomEndCommand}" CommandParameter="out" />
-                                    </Custom:ZoomGestureContainer.Behaviors>                                    
+                                <Custom:ZoomGestureContainer ZoomStarted="ZoomGestureContainer_ZoomStarted" ZoomEnded="ZoomGestureContainer_ZoomEnded">                                    
                                     <Custom:ZoomGestureContainer.Content>
                                         <Image Grid.RowSpan="2" Aspect="Fill" Source="{Binding ImageUrl}"/>
                                     </Custom:ZoomGestureContainer.Content>
