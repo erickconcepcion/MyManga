@@ -1,46 +1,39 @@
-﻿using MyManga.Services;
-using System;
+﻿using Prism;
+using Prism.Ioc;
+using MyManga.ViewModels;
+using MyManga.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MyManga.Infrastructure.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MyManga
 {
-    public partial class App : Application
+    public partial class App
     {
-        public App()
+        /* 
+         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
+         * This imposes a limitation in which the App class must have a default constructor. 
+         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
+         */
+        public App() : this(null) { }
+
+        public App(IPlatformInitializer initializer) : base(initializer) { }
+
+        protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
-        protected override void OnStart()
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Handle when your app starts
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
-
-        //Singleton services
-        private static InMangaService inMangaService;
-        public static InMangaService InMangaService {
-            get
-            {
-                if (inMangaService == null)
-                {
-                    inMangaService = new InMangaService();
-                }
-                return inMangaService;
-            }
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChaptersPage, ChaptersPageViewModel>();
+            containerRegistry.RegisterForNavigation<ReadMangaPage, ReadMangaPageViewModel>();
+            containerRegistry.RegisterSingleton<IInMangaService, InMangaService>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Forms;
 
 namespace MyManga.InMangaModels
 {
@@ -18,6 +19,6 @@ namespace MyManga.InMangaModels
                 return $"https://inmanga.com{ThumbnailPath}";
             }
         }
-
+        
     }
 }

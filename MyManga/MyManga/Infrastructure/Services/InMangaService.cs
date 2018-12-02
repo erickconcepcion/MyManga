@@ -10,9 +10,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-namespace MyManga.Services
+namespace MyManga.Infrastructure.Services
 {
-    public class InMangaService
+    public interface IInMangaService
+    {
+        Task<string> GetSuscessStringResponse(string url);
+        Task<IEnumerable<MangaResult>> GetAllMangaResponse();
+        Task<IEnumerable<ChapterDetailResult>> GetMangaDetails(string mangaId);
+        Task<IEnumerable<MangaPage>> GetListPageModels(MangaResult manga, ChapterDetailResult chapter);
+    }
+    public class InMangaService : IInMangaService
     {
         public const string AllManga = "https://inmanga.com/OnMangaQuickSearch/Source/QSMangaList.json";
         public const string MangaDetails = "https://inmanga.com/chapter/getall?mangaIdentification={0}";
@@ -27,12 +34,19 @@ namespace MyManga.Services
             string resString = "";
             using (var client = new HttpClient())
             {
-                var response = await client.GetAsync(url);                
-                if (!response.IsSuccessStatusCode)
+                try
                 {
-                    throw new UnsuccessfulRequestException(response.StatusCode);
+                    var response = await client.GetAsync(url);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new UnsuccessfulRequestException(response.StatusCode);
+                    }
+                    resString = await response.Content.ReadAsStringAsync();
                 }
-                resString = await response.Content.ReadAsStringAsync();
+                catch (Exception e)
+                {
+                    throw new UnsuccessfulRequestException(e.Message);
+                }                
             }
             return resString;
         }
@@ -42,25 +56,13 @@ namespace MyManga.Services
             return JsonConvert.DeserializeObject<List<MangaResult>>(res);
         }
 
-        public async Task<ChapterMessageResult> GetMangaDetails(string mangaId)
+        public async Task<IEnumerable<ChapterDetailResult>> GetMangaDetails(string mangaId)
         {
             var res = await GetSuscessStringResponse(string.Format(MangaDetails, mangaId));
             var desResponse = JsonConvert.DeserializeObject<ChapterResult>(res);
-            return JsonConvert.DeserializeObject<ChapterMessageResult>(desResponse.data);
+            return JsonConvert.DeserializeObject<ChapterMessageResult>(desResponse.data).result.OrderByDescending(c => c.Number);
         }
-        public async Task<IEnumerable<string>> GetListPages(MangaResult manga, ChapterDetailResult chapter)
-        {
-            var res = await GetSuscessStringResponse(string.Format(PageList, chapter.Identification));
-            var doc = new HtmlDocument();
-            doc.LoadHtml(res);
-            var pageIdList = doc.GetElementbyId("PageList")
-                .ChildNodes.Where(n => n.Name == "option").ToList()
-                .Select(n => string.Format(PageUrl,
-                    manga.Name.Replace(" ", "-"), chapter.FriendlyChapterNumberUrl, n.InnerText, n.GetAttributeValue("value", ""))
-                );
-            return pageIdList;
-        }
-
+        
         public async Task<IEnumerable<MangaPage>> GetListPageModels(MangaResult manga, ChapterDetailResult chapter)
         {
             var res = await GetSuscessStringResponse(string.Format(PageList, chapter.Identification));

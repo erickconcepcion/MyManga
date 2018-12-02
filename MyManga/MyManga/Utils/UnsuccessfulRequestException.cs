@@ -10,7 +10,7 @@ namespace MyManga.Utils
             : base($"Is not a success status code. Code: {statusCode.ToString()}.")
         {
         }
-        public UnsuccessfulRequestException(): base("Not internet connection.")
+        public UnsuccessfulRequestException(string message = ""): base($"Not internet connection. {message}")
         {
 
         }
