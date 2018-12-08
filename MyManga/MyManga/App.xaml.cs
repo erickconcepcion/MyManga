@@ -5,6 +5,9 @@ using MyManga.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MyManga.Infrastructure.Services;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MyManga
@@ -34,6 +37,11 @@ namespace MyManga
             containerRegistry.RegisterForNavigation<ChaptersPage, ChaptersPageViewModel>();
             containerRegistry.RegisterForNavigation<ReadMangaPage, ReadMangaPageViewModel>();
             containerRegistry.RegisterSingleton<IInMangaService, InMangaService>();
+        }
+        protected override void OnStart()
+        {
+            AppCenter.Start($"ios={DeployConstants.IOSSecret};android={DeployConstants.AndroidSecret};uwp={DeployConstants.WUPSecret}", typeof(Analytics), typeof(Crashes));
+            base.OnStart();
         }
     }
 }
