@@ -11,6 +11,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <ActivityIndicator  Color="DeepSkyBlue" IsRunning = "{Binding OnGoing}" IsVisible="{Binding OnGoing}" />
                 <cards:CarouselView x:Name="CvMangaReader" ItemsSource="{Binding MangaPages}"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
@@ -25,7 +26,7 @@
                                     <Custom:ZoomGestureContainer.Content>
                                         <ff:CachedImage Source = "{Binding ImageUrl}" LoadingPlaceholder   = "loadingmanga"
                                                         ErrorPlaceholder = "errormanga" CacheDuration = "30" RetryCount = "5"
-                                                        RetryDelay = "500" DownsampleToViewSize = "true" Grid.RowSpan="2" Aspect="Fill">
+                                                        RetryDelay = "500" Grid.RowSpan="2" Aspect="Fill">
                                         </ff:CachedImage>
                                     </Custom:ZoomGestureContainer.Content>
                                 </Custom:ZoomGestureContainer>
@@ -35,7 +36,6 @@
                             </Grid>
                         </DataTemplate>
                     </cards:CarouselView.ItemTemplate>
-                    <controls:IndicatorsControl ToFadeDuration="2500"/>
                     <controls:LeftArrowControl ToFadeDuration="2500"/>
                     <controls:RightArrowControl ToFadeDuration="2500"/>
                 </cards:CarouselView>

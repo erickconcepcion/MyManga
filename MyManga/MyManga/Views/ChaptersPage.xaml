@@ -16,9 +16,12 @@
                     <DataTemplate>
                         <!--<TextCell  Text="{Binding ShowChapter}"/>-->
                         <ViewCell>
-                            <StackLayout Padding="16" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
-                                <Label Text="{Binding ShowChapter}" FontSize="Small" FontAttributes="Bold"/>
-                                <Label Text="{Binding ShowPages}" FontSize="Small" />                                
+                            <StackLayout Orientation="Horizontal" Padding="8">
+                                <Image Source = "chaptericon"  HorizontalOptions="Center" WidthRequest="50" />
+                                <StackLayout Margin="12, 0, 0, 0" VerticalOptions="CenterAndExpand">
+                                    <Label Text="{Binding ShowChapter}" FontSize="Small" FontAttributes="Bold"/>
+                                    <Label Text="{Binding ShowPages}" FontSize="Small" />
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
