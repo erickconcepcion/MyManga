@@ -25,7 +25,7 @@
                                 <Custom:ZoomGestureContainer ZoomStarted="ZoomGestureContainer_ZoomStarted" ZoomEnded="ZoomGestureContainer_ZoomEnded">                                    
                                     <Custom:ZoomGestureContainer.Content>
                                         <ff:CachedImage Source = "{Binding ImageUrl}" LoadingPlaceholder   = "loadingmanga"
-                                                        ErrorPlaceholder = "errormanga" CacheDuration = "30" RetryCount = "5"
+                                                        ErrorPlaceholder = "errormanga" CacheDuration = "1" RetryCount = "5"
                                                         RetryDelay = "500" Grid.RowSpan="2" Aspect="Fill">
                                         </ff:CachedImage>
                                     </Custom:ZoomGestureContainer.Content>

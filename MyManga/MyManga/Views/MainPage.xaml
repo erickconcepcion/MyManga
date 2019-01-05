@@ -5,15 +5,30 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="MyManga.Views.MainPage"
              Title="{Binding Title}">
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Entry Placeholder="Busca tu manga" Text="{Binding SearchText}}">
-            <Entry.Behaviors>
-                <pb:EventToCommandBehavior EventName="TextChanged"
+    <NavigationPage.TitleView>
+        <Frame
+            HasShadow="False"
+            IsClippedToBounds="True"
+            Margin="0, 6, 12, 6"
+            Padding="0">
+            <Frame.Content>
+                <SearchBar
+                    x:Name="SearchBar"
+                    Placeholder="Buscar"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="35"
+                    Text="{Binding SearchText}"
+                    SearchCommand="{Binding FilterMangaCommand}"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
+                    <SearchBar.Behaviors>
+                        <pb:EventToCommandBehavior EventName="TextChanged"
                                           Command="{Binding FilterMangaCommand}"/>
-            </Entry.Behaviors>
-        </Entry>
-
+                    </SearchBar.Behaviors>
+                </SearchBar>
+            </Frame.Content>
+        </Frame>
+    </NavigationPage.TitleView>
+    <StackLayout>
         <ListView ItemsSource="{Binding MangaResults}" 
                   HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" SelectionMode="None">
             <ListView.Behaviors>
@@ -21,7 +36,6 @@
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <!--<ImageCell ImageSource="{Binding ThumbnailPathComplete}" Text="{Binding Name}" Detail="{Binding BroadcastStatusDescription}"/>-->
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="8">
                             <ff:CachedImage Source = "{Binding ThumbnailPathComplete}" LoadingPlaceholder = "loadingmanga"
@@ -29,7 +43,6 @@
                                                         RetryDelay = "500" DownsampleToViewSize = "true" 
                                                         HorizontalOptions="Center" WidthRequest="40">
                             </ff:CachedImage>
-                            <!--<Image Source="{Binding ThumbnailPathComplete}" HorizontalOptions="Center" WidthRequest="40" />-->
                             <StackLayout VerticalOptions="CenterAndExpand">
                                 <Label Text="{Binding Name}" FontSize="Small" FontAttributes="Bold"/>
                                 <Label Text="{Binding BroadcastStatusDescription}" FontSize="Small" />
