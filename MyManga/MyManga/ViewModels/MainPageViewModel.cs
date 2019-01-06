@@ -20,7 +20,7 @@ namespace MyManga.ViewModels
         {
             _navigationService = navigationService;
             _inMangaService = inMangaService;
-            Title = "My Manga Comodo";
+            Title = "My Manga";
 
             //command declaration
             FilterMangaCommand = new DelegateCommand<string>(FilterManga, CanFilter);
@@ -38,7 +38,13 @@ namespace MyManga.ViewModels
             get{ return _mangaResults; }
             set{ SetProperty(ref _mangaResults, value); }
         }
-        
+
+        private string _searchText = "";
+        public string SearchText {
+            get { return _searchText; }
+            set { SetProperty(ref _searchText, value); }
+        }
+
         //Util Fields
         private IEnumerable<MangaResult> _mangaFilter = new List<MangaResult>();
 
@@ -47,14 +53,14 @@ namespace MyManga.ViewModels
         void FilterManga(string parameter)
         {
             IsListRefreshing = true;
-            if (string.IsNullOrWhiteSpace(parameter) || string.IsNullOrEmpty(parameter))
+            if (string.IsNullOrWhiteSpace(SearchText) || string.IsNullOrEmpty(SearchText))
             {
                 MangaResults = new ObservableCollection<MangaResult>(_mangaFilter);
             }
             else
             {
                 MangaResults = new ObservableCollection<MangaResult>(_mangaFilter
-                                   .Where(x => x.Name.ToLower().Contains(parameter.ToLower())));
+                                   .Where(x => x.Name.ToLower().Contains(SearchText.ToLower())));
             }
             IsListRefreshing = false;
         }

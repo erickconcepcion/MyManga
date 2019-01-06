@@ -5,11 +5,13 @@
              xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              xmlns:pb="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:Custom="clr-namespace:MyManga.CustomViews"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="MyManga.Views.ReadMangaPage"
              Title="{Binding Title}">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <ActivityIndicator  Color="DeepSkyBlue" IsRunning = "{Binding OnGoing}" IsVisible="{Binding OnGoing}" />
                 <cards:CarouselView x:Name="CvMangaReader" ItemsSource="{Binding MangaPages}"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
@@ -22,7 +24,10 @@
                                 </Grid.RowDefinitions>
                                 <Custom:ZoomGestureContainer ZoomStarted="ZoomGestureContainer_ZoomStarted" ZoomEnded="ZoomGestureContainer_ZoomEnded">                                    
                                     <Custom:ZoomGestureContainer.Content>
-                                        <Image Grid.RowSpan="2" Aspect="Fill" Source="{Binding ImageUrl}"/>
+                                        <ff:CachedImage Source = "{Binding ImageUrl}" LoadingPlaceholder   = "loadingmanga"
+                                                        ErrorPlaceholder = "errormanga" CacheDuration = "1" RetryCount = "5"
+                                                        RetryDelay = "500" Grid.RowSpan="2" Aspect="Fill">
+                                        </ff:CachedImage>
                                     </Custom:ZoomGestureContainer.Content>
                                 </Custom:ZoomGestureContainer>
                                 <StackLayout Grid.Row="1" BackgroundColor="#80000000" Padding="12">
@@ -31,7 +36,6 @@
                             </Grid>
                         </DataTemplate>
                     </cards:CarouselView.ItemTemplate>
-                    <controls:IndicatorsControl ToFadeDuration="1500"/>
                     <controls:LeftArrowControl ToFadeDuration="2500"/>
                     <controls:RightArrowControl ToFadeDuration="2500"/>
                 </cards:CarouselView>

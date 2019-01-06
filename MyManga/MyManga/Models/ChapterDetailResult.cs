@@ -14,6 +14,6 @@ namespace MyManga.InMangaModels
         public string FriendlyChapterNumberUrl { get; set; }
 
         public string ShowChapter { get { return $"Capitulo: {FriendlyChapterNumber}"; } }
-        public string ShowPages { get { return $"{FriendlyChapterNumber} Páginas"; } }
+        public string ShowPages { get { return $"{PagesCount} Páginas"; } }
     }
 }

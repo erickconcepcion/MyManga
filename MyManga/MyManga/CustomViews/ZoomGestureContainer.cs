@@ -55,8 +55,6 @@ namespace MyManga.CustomViews
             }
             if (e.Status == GestureStatus.Completed)
             {
-                //xOffset = Content.TranslationX;
-                //yOffset = Content.TranslationY;
                 Content.TranslationX = 0;
                 Content.TranslationY = 0;
                 currentScale = startScale;

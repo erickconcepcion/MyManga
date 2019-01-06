@@ -2,18 +2,51 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pb="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="MyManga.Views.MainPage"
-             Title="{Binding Title}">
+             >
+    <NavigationPage.TitleView>
+        <RelativeLayout>
+            <StackLayout Margin="0, 8, 12, 6" x:Name="TitleControls" Orientation="Horizontal"
+                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+                <Label TextColor="White" FontSize="20" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Text="{Binding Title}"/>
+                <Image x:Name="SearchIndicator" Source="SearchWhite" WidthRequest="25" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="Search_Tapped"
+                            NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            
+            <Frame x:Name="SearchFrame"
+                HasShadow="False"
+                IsClippedToBounds="True"
+                Margin="0, 6, 12, 6"
+                VerticalOptions="CenterAndExpand"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                Padding="0">
+                <Frame.Content>
+                    <SearchBar
+                    x:Name="SearchBar"
+                    Placeholder="Buscar"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    HeightRequest="35"
+                    Text="{Binding SearchText}"
+                    SearchCommand="{Binding FilterMangaCommand}"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                    Unfocused="SearchBar_Unfocused">
+                        <SearchBar.Behaviors>
+                            <pb:EventToCommandBehavior EventName="TextChanged"
+                                          Command="{Binding FilterMangaCommand}"/>
+                        </SearchBar.Behaviors>
+                    </SearchBar>
+                </Frame.Content>
+            </Frame>
+        </RelativeLayout>        
+    </NavigationPage.TitleView>
     <StackLayout>
-        <!-- Place new controls here -->
-        <Entry Placeholder="Busca tu manga">
-            <Entry.Behaviors>
-                <pb:EventToCommandBehavior EventName="TextChanged"
-                                          Command="{Binding FilterMangaCommand}"
-                                          EventArgsParameterPath="NewTextValue"/>
-            </Entry.Behaviors>
-        </Entry>
-
         <ListView ItemsSource="{Binding MangaResults}" 
                   HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" SelectionMode="None">
             <ListView.Behaviors>
@@ -21,10 +54,13 @@
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <!--<ImageCell ImageSource="{Binding ThumbnailPathComplete}" Text="{Binding Name}" Detail="{Binding BroadcastStatusDescription}"/>-->
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="8">
-                            <Image Source="{Binding ThumbnailPathComplete}" HorizontalOptions="Center" WidthRequest="40" />
+                            <ff:CachedImage Source = "{Binding ThumbnailPathComplete}" LoadingPlaceholder = "loadingmanga"
+                                                        CacheDuration = "30" RetryCount = "5"
+                                                        RetryDelay = "500" DownsampleToViewSize = "true" 
+                                                        HorizontalOptions="Center" WidthRequest="40">
+                            </ff:CachedImage>
                             <StackLayout VerticalOptions="CenterAndExpand">
                                 <Label Text="{Binding Name}" FontSize="Small" FontAttributes="Bold"/>
                                 <Label Text="{Binding BroadcastStatusDescription}" FontSize="Small" />
