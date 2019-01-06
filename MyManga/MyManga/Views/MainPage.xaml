@@ -4,29 +4,47 @@
              xmlns:pb="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="MyManga.Views.MainPage"
-             Title="{Binding Title}">
+             >
     <NavigationPage.TitleView>
-        <Frame
-            HasShadow="False"
-            IsClippedToBounds="True"
-            Margin="0, 6, 12, 6"
-            Padding="0">
-            <Frame.Content>
-                <SearchBar
+        <RelativeLayout>
+            <StackLayout Margin="0, 8, 12, 6" x:Name="TitleControls" Orientation="Horizontal"
+                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+                <Label TextColor="White" FontSize="20" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontAttributes="Bold" Text="{Binding Title}"/>
+                <Image x:Name="SearchIndicator" Source="SearchWhite" WidthRequest="25" HorizontalOptions="End" VerticalOptions="CenterAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="Search_Tapped"
+                            NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            
+            <Frame x:Name="SearchFrame"
+                HasShadow="False"
+                IsClippedToBounds="True"
+                Margin="0, 6, 12, 6"
+                VerticalOptions="CenterAndExpand"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                Padding="0">
+                <Frame.Content>
+                    <SearchBar
                     x:Name="SearchBar"
                     Placeholder="Buscar"
                     HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     HeightRequest="35"
                     Text="{Binding SearchText}"
                     SearchCommand="{Binding FilterMangaCommand}"
-                    SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
-                    <SearchBar.Behaviors>
-                        <pb:EventToCommandBehavior EventName="TextChanged"
+                    SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                    Unfocused="SearchBar_Unfocused">
+                        <SearchBar.Behaviors>
+                            <pb:EventToCommandBehavior EventName="TextChanged"
                                           Command="{Binding FilterMangaCommand}"/>
-                    </SearchBar.Behaviors>
-                </SearchBar>
-            </Frame.Content>
-        </Frame>
+                        </SearchBar.Behaviors>
+                    </SearchBar>
+                </Frame.Content>
+            </Frame>
+        </RelativeLayout>        
     </NavigationPage.TitleView>
     <StackLayout>
         <ListView ItemsSource="{Binding MangaResults}" 

@@ -134,6 +134,8 @@
     <Content Include="errormanga.png" />
     <Content Include="loadingmanga.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="SearchBlack.png" />
+    <Content Include="SearchWhite.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
