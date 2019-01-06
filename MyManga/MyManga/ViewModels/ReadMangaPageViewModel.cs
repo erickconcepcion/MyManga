@@ -22,8 +22,6 @@ namespace MyManga.ViewModels
         {
             _navigationService = navigationService;
             _inMangaService = inMangaService;
-            ZoomStartCommand = new DelegateCommand<object>(ZoomStart, CanZoomStart);
-            ZoomEndCommand = new DelegateCommand<object>(ZoomEnd, CanZoomEnd);
         }
 
         //bindable props
@@ -34,38 +32,17 @@ namespace MyManga.ViewModels
             set { SetProperty(ref _mangaPages, value); }
         }
 
-        private bool _canSweep = true;
-        public bool CanSweep
+        private bool _onGoing = true;
+        public bool OnGoing
         {
-            get { return _canSweep; }
-            set { SetProperty(ref _canSweep, value); }
+            get { return _onGoing; }
+            set { SetProperty(ref _onGoing, value); }
         }
 
         //utils fields
         private MangaResult _mangaResult;
         private ChapterDetailResult _chapterDetail;
-
-        //commands
-        public DelegateCommand<object> ZoomStartCommand { get; private set; }
-        void ZoomStart(object parameter)
-        {
-            CanSweep = false;            
-        }
-        bool CanZoomStart(object parameter)
-        {
-            return true;
-        }
-
-        public DelegateCommand<object> ZoomEndCommand { get; private set; }
-        void ZoomEnd(object parameter)
-        {
-            CanSweep = true;
-        }
-        bool CanZoomEnd(object parameter)
-        {
-            return true;
-        }
-
+        
         public async Task InnitMangaPageCarouselAsync(MangaResult manga, ChapterDetailResult chapter)
         {
             try
@@ -79,12 +56,14 @@ namespace MyManga.ViewModels
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
-        {            
+        {
+            OnGoing = true;
             base.OnNavigatedTo(parameters);
             _mangaResult = parameters.GetValue<MangaResult>("manga");
             _chapterDetail = parameters.GetValue<ChapterDetailResult>("chapter");
             Title = $"{_mangaResult.Name}: {_chapterDetail.ShowChapter}";
             await InnitMangaPageCarouselAsync(_mangaResult, _chapterDetail);
+            OnGoing = false;
         }
 
     }
