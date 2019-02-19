@@ -25,6 +25,7 @@ namespace MyManga.ViewModels
             //command declaration
             FilterMangaCommand = new DelegateCommand<string>(FilterManga, CanFilter);
             SelectMangaCommand = new DelegateCommand<MangaResult>(SelectManga, CanSelect);
+            RefreshMangasCommand = new DelegateCommand(RefreshMangas, CanRefreshMangas);
 
         }
         //Dependency Fields
@@ -81,6 +82,15 @@ namespace MyManga.ViewModels
             return true;
         }
 
+        public DelegateCommand RefreshMangasCommand { get; set; }
+        async void RefreshMangas()
+        {
+            await InnitMangaListAsync();
+        }
+        bool CanRefreshMangas()
+        {
+            return true;
+        }
         public async Task InnitMangaListAsync()
         {
             IsListRefreshing = true;
@@ -97,8 +107,11 @@ namespace MyManga.ViewModels
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
-        {
-            await InnitMangaListAsync();
+        {            
+            if (!MangaResults.Any())
+            {
+                await InnitMangaListAsync();
+            }
             base.OnNavigatedTo(parameters);            
         }
         
