@@ -31,8 +31,8 @@ namespace MyManga.Views
 
         private async void SearchBar_Unfocused(object sender, FocusEventArgs e)
         {
-            TitleControls.FadeTo(1, 200);
             SearchFrame.TranslateTo(transition, 0, 200);
+            TitleControls.FadeTo(1, 200);
             await SearchFrame.FadeTo(0, 200);
             SearchFrame.IsVisible = false;
         }        

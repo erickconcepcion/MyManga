@@ -19,6 +19,7 @@ namespace MyManga.ViewModels
             _navigationService = navigationService;
             _inMangaService = inMangaService;
             SelectChapterCommand = new DelegateCommand<ChapterDetailResult>(SelectChapter, CanSelect);
+            RefreshChaptersCommand = new DelegateCommand(RefreshChapters, CanRRefreshChapters);
         }
 
         //Dependency Fields
@@ -52,6 +53,15 @@ namespace MyManga.ViewModels
             return true;
         }
 
+        public DelegateCommand RefreshChaptersCommand { get; set; }
+        async void RefreshChapters()
+        {
+            await InnitChapterListAsync(_mangaResult);
+        }
+        bool CanRRefreshChapters()
+        {
+            return true;
+        }
 
         public async Task InnitChapterListAsync(MangaResult manga)
         {
@@ -71,7 +81,10 @@ namespace MyManga.ViewModels
         {
             _mangaResult = parameters.GetValue<MangaResult>("manga") != null ? parameters.GetValue<MangaResult>("manga") : _mangaResult;
             Title = _mangaResult.Name;
-            await InnitChapterListAsync(_mangaResult);            
+            if (!ChapterResults.Any())
+            {
+                await InnitChapterListAsync(_mangaResult);
+            }         
             base.OnNavigatedTo(parameters);
         }
     }

@@ -48,7 +48,7 @@
     </NavigationPage.TitleView>
     <StackLayout>
         <ListView ItemsSource="{Binding MangaResults}" 
-                  HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" SelectionMode="None">
+                  HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}" IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshMangasCommand}" SelectionMode="None">
             <ListView.Behaviors>
                 <pb:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMangaCommand}" EventArgsParameterPath="Item" />
             </ListView.Behaviors>
@@ -56,14 +56,14 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="8">
-                            <ff:CachedImage Source = "{Binding ThumbnailPathComplete}" LoadingPlaceholder = "loadingmanga"
+                            <ff:CachedImage Source = "{Binding ThumbnailPathComplete}" LoadingPlaceholder = "LoadingListBlack"
                                                         CacheDuration = "30" RetryCount = "5"
                                                         RetryDelay = "500" DownsampleToViewSize = "true" 
-                                                        HorizontalOptions="Center" WidthRequest="40">
+                                                        HorizontalOptions="Center" WidthRequest="60">
                             </ff:CachedImage>
                             <StackLayout VerticalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" FontSize="Small" FontAttributes="Bold"/>
-                                <Label Text="{Binding BroadcastStatusDescription}" FontSize="Small" />
+                                <Label Text="{Binding Name}" FontSize="Medium" FontFamily="Roboto" FontAttributes="Bold" TextColor="#000000" />
+                                <Label Text="{Binding BroadcastStatusDescription}" FontFamily="Roboto" FontSize="Medium" Opacity="0.54" TextColor="#000000"/>
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>
