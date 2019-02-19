@@ -61,7 +61,7 @@ namespace MyManga.ViewModels
             base.OnNavigatedTo(parameters);
             _mangaResult = parameters.GetValue<MangaResult>("manga");
             _chapterDetail = parameters.GetValue<ChapterDetailResult>("chapter");
-            Title = $"{_mangaResult.Name}: {_chapterDetail.ShowChapter}";
+            Title =_chapterDetail.ShowChapter;
             await InnitMangaPageCarouselAsync(_mangaResult, _chapterDetail);
             OnGoing = false;
         }

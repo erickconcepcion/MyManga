@@ -132,6 +132,8 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="chaptericon.png" />
     <Content Include="errormanga.png" />
+    <Content Include="LoadingListBlack.png" />
+    <Content Include="LoadingListWhite.png" />
     <Content Include="loadingmanga.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="SearchBlack.png" />

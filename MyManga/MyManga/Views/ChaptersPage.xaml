@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ListView  ItemsSource="{Binding ChapterResults}" HasUnevenRows="true" IsRefreshing="{Binding IsListRefreshing}"
-                       IsPullToRefreshEnabled="True" RefreshCommand=""
+                       IsPullToRefreshEnabled="True" RefreshCommand="{Binding RefreshChaptersCommand}"
                        SelectionMode="None">
                 <ListView.Behaviors>
                     <pb:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectChapterCommand}" EventArgsParameterPath="Item" />
