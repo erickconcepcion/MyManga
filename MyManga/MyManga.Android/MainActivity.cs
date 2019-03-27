@@ -22,6 +22,7 @@ namespace MyManga.Droid
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            XF.Material.Droid.Material.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App(new AndroidInitializer()));
         }

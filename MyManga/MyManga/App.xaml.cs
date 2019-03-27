@@ -23,7 +23,7 @@ namespace MyManga
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
+            XF.Material.Forms.Material.Init(this);
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 

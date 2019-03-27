@@ -17,7 +17,7 @@ namespace MyManga.Views
             SearchFrame.FadeTo(0, 1);
             SearchFrame.IsVisible = false;
         }
-        private double transition = (DeviceDisplay.ScreenMetrics.Width / DeviceDisplay.ScreenMetrics.Density) / 2;
+        private double transition = (DeviceDisplay.MainDisplayInfo.Width / DeviceDisplay.MainDisplayInfo.Density) / 2;
         private async void Search_Tapped(object sender, EventArgs e)
         {
             SearchFrame.IsVisible = true;
